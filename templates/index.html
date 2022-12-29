@@ -11,5 +11,11 @@
             <input class="form-control" type="file" name="file">
             <input class="btn btn-primary mt-3" type="submit" value="Predict">
         </form>
+
+        {% if result %}
+            <img src=imagename></img>
+            <p class="text-editor">{{result}} with {{percent}}% confidence</p>
+        {% endif %}
+
     </body>
 </html>
