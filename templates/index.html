@@ -3,19 +3,15 @@
     <head>
         <title>Malaria Detection</title>
     </head>
-
     <body>
         <h1>Malaria Detection Using Deep Learning</h1>
-
         <form action='/' method="post" enctype="multipart/form-data">
-            <input class="form-control" type="file" name="file">
-            <input class="btn btn-primary mt-3" type="submit" value="Predict">
+            <input type="file" id="img" name="file" accept="image/*">
+            <input type="submit" value="Predict">
         </form>
-
         {% if result %}
-            <img src=imagename></img>
-            <p class="text-editor">{{result}} with {{percent}}% confidence</p>
+            <img src="/static/{{ file.filename }}"/>
+            <p>{{result}} with {{percent}}% confidence</p>
         {% endif %}
-
     </body>
 </html>

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, send_from_directory
 import cv2 as cv
 import numpy as np
 import tensorflow as tf
-import os
+from pathlib import Path
 
 app = Flask(__name__)
 model = tf.keras.models.load_model('model.h5')
@@ -13,9 +13,11 @@ def home():
 
 @app.route('/', methods=['POST'])
 def predict():
+    [f.unlink() for f in Path("./static").glob("*") if f.is_file()]
+
     file = request.files['file']
     if not file: return render_template('index.html')
-    path = './samples/' + file.filename
+    path = './static/' + file.filename
     file.save(path)
 
     img = cv.imread(path)
@@ -34,9 +36,12 @@ def predict():
         result = 'Uninfected'
         percent = nodes[0][1] * 100
 
-    imagename = os.listdir(os.getcwd() + r'\samples')[-1]
+    return render_template('index.html', result=result, percent=percent, file=file)
 
-    return render_template('index.html', result=result, percent=percent, imagename=imagename)
+@app.route('/static/<path:img>')
+def display_img(img):
+    # send from directory takes in name (not path so not /static but static instead) and img name
+    return send_from_directory('static', img)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=1000, debug=True)

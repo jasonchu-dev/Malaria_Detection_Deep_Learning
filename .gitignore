@@ -1,3 +1,5 @@
 .ipynb_checkpoints/
 Dataset/
 model.h5
+static/css
+static/js
