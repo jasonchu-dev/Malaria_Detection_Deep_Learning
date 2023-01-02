@@ -1,47 +1,44 @@
-from flask import Flask, render_template, request, send_from_directory
-import cv2 as cv
+import streamlit as st
 import numpy as np
 import tensorflow as tf
-from pathlib import Path
+from PIL import Image, ImageOps
 
-app = Flask(__name__)
 model = tf.keras.models.load_model('model.h5')
 
-@app.route('/', methods=['GET'])
-def home():
-    return render_template('index.html')
+col1, col2, col3 = st.columns(3)
 
-@app.route('/', methods=['POST'])
-def predict():
-    [f.unlink() for f in Path("./static").glob("*") if f.is_file()]
-
-    file = request.files['file']
-    if not file: return render_template('index.html')
-    path = './static/' + file.filename
-    file.save(path)
-
-    img = cv.imread(path)
-    img = cv.resize(img, (225, 225))
-    img = img.reshape(1, 225, 225, 3)
+def predict(f):
+    img = Image.open(f)
+    img = ImageOps.fit(img, (225, 225), Image.ANTIALIAS)
+    img = np.array(img)
+    img = img[np.newaxis,...]
     img = img/255
+
     nodes = model.predict(img)
-    # nodes is np.array within array and cannot flatten so it must be [0][0] and [0][1] not [0] and [1]
     a = np.argmax(nodes, axis=1)
     percent, result = None, None
 
-    if a == 0: 
-        result = 'Infected'
+    if a == 0:
+        result = 'INFECTED'
         percent = nodes[0][0] * 100
     else: 
-        result = 'Uninfected'
+        result = 'UNINFECTED'
         percent = nodes[0][1] * 100
 
-    return render_template('index.html', result=result, percent=percent, file=file)
+    return result, percent
 
-@app.route('/static/<path:img>')
-def display_img(img):
-    # send from directory takes in name (not path so not /static but static instead) and img name
-    return send_from_directory('static', img)
+st.markdown("<h1 style='text-align:center;font-size:40px;'>Malaria Detection Using Deep Learning</h1>", unsafe_allow_html=True)
 
-if __name__ == '__main__':
-    app.run(port=1000, debug=True)
+file = st.file_uploader('Upload an image', type=['jpg', 'png'])
+
+if st.button('Predict'):
+    if not file: 
+        st.write('Please put in image')
+    else:
+        result, percent = predict(file)
+        st.image(file, use_column_width=True)
+        if result == 'INFECTED':
+            st.markdown(f'<h1 style="color:red;font-size:24px;">INFECTED</h1>', unsafe_allow_html=True)
+        else:
+            st.markdown(f'<h1 style="color:green;font-size:24px;">UNINFECTED</h1>', unsafe_allow_html=True)
+        st.write(f"{percent}% confidence")
