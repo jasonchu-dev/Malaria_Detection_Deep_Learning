@@ -1,6 +1,11 @@
 # Malaria Detection
 
-Deep learning/software engineering project using TensorFlow and Streamlit. Prompts user for malaria image sample. Use model to make prediction. Tell user whether malaria is detected or not.
+Deep learning/software engineering project. Prompts user for malaria image sample. Use API call to make prediction. Tell user whether malaria is detected or not.
+
+## Modules
+* TensorFlow: Convolutional Neural Networks
+* Streamlit: Front-end
+* FastAPI: API call
 
 ## To run
 Python needed, then run
@@ -11,7 +16,12 @@ Unzip Dataset.zip and model.zip
 
 Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria/download?datasetVersionNumber=1) can used on hardware acceleration if there is one.
 
-Then run
+Open two terminals:
+* Terminal one
+```
+    uvicorn api:app --reload
+```
+* Terminal two
 ```
     streamlit run app.py
 ```

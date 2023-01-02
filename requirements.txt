@@ -5,3 +5,5 @@ numpy
 Pillow
 protobuf==3.20.*
 streamlit
+fastapi
+uvicorn
