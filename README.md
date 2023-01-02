@@ -1,6 +1,6 @@
 # Malaria Detection
 
-Combination of Flask and TensorFlow in a deep learning project with a tiny bit of software engineering.
+Deep learning/software engineering project using TensorFlow and Streamlit. Prompts user for malaria image sample. Use model to make prediction. Tell user whether malaria is detected or not.
 
 ## To run
 Python needed, then run
