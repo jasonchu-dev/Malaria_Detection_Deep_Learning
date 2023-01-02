@@ -13,5 +13,5 @@ Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-
 
 Then run
 ```
-    python app.py
+    streamlit run app.py
 ```
