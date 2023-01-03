@@ -14,8 +14,6 @@ Python needed, then run
 ```
 Unzip model.zip
 
-Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria/download?datasetVersionNumber=1) can used on hardware acceleration if there is one.
-
 Open two terminals:
 * Terminal one
 ```
