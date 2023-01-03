@@ -12,7 +12,7 @@ Python needed, then run
 ```
     pip install -r requirements.txt
 ```
-Unzip Dataset.zip and model.zip
+Unzip model.zip
 
 Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria/download?datasetVersionNumber=1) can used on hardware acceleration if there is one.
 
@@ -25,3 +25,11 @@ Open two terminals:
 ```
     streamlit run app.py
 ```
+
+## To train
+
+Unzip Dataset.zip (for CPU)
+
+Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria/download?datasetVersionNumber=1) for GPU.
+
+Run model.ipynb

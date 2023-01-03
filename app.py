@@ -3,7 +3,7 @@ import requests
 import json
 import os
 
-col1, col2, col3 = st.columns(3)
+# col1, col2, col3 = st.columns(3)
 result, percent, color = '', '', None
 
 st.markdown(f"""<h1 style='text-align: center; font-size: 40px;'>
@@ -21,12 +21,13 @@ if st.button('Predict'):
         input = {'path':path}
         with open(file.name, 'wb') as f:
             f.write(file.getbuffer())
+        
         res = requests.post(url='http://127.0.0.1:8000', data=json.dumps(input))
 
         os.remove(path)
 
         for i in res.text:
-            if i in 'UNINFECTED':
+            if i in 'CDEFINTU':
                 result += ''.join(i)
             elif i in '.0123456789':
                 percent += ''.join(i)
@@ -43,5 +44,8 @@ if st.button('Predict'):
                             {percent}% &nbsp;&nbsp;confidence
                         </span>
                     </p>"""
-
+        st.write(f"""<h2 style='font-size: 30px;'>
+                    Results:
+                </h2>""",
+            unsafe_allow_html=True)
         st.markdown(output, unsafe_allow_html=True)
