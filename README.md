@@ -5,7 +5,7 @@ Deep learning/software engineering project. Prompts user for malaria image sampl
 ## Modules
 * TensorFlow: Convolutional Neural Networks
 * Streamlit: Front-end
-* FastAPI: API call
+* FastAPI: Back-end, API call
 
 ## To run
 Python needed, then run
@@ -23,6 +23,7 @@ Open two terminals:
 ```
     streamlit run app.py
 ```
+(protobuf 3.20.* required, once done revert back to latest protobuf)
 
 ## To train
 
