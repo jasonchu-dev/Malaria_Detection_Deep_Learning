@@ -30,4 +30,7 @@ Open two terminals:
 ```
     streamlit run app.py
 ```
-(protobuf 3.20.* required, once done revert back to latest protobuf)
+When done with application, revert back to latest Protobuf by running:
+```
+    pip install --upgrade protobuf
+```
