@@ -5,16 +5,23 @@ Deep learning/software engineering project. Prompts user for malaria image sampl
 ## Modules
 * TensorFlow: Convolutional Neural Networks
 * Streamlit: Front-end
-* FastAPI: Back-end, API call
+* FastAPI: API call
 
-## To run
+## To train
+
+Unzip Dataset.zip (for CPU)
+
+Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria/download?datasetVersionNumber=1) for GPU.
+
 Python needed, then run
 ```
     pip install -r requirements.txt
+    python model.py
 ```
-Unzip model.zip
+## To run
 
 Open two terminals:
+
 * Terminal one
 ```
     uvicorn api:app --reload
@@ -24,11 +31,3 @@ Open two terminals:
     streamlit run app.py
 ```
 (protobuf 3.20.* required, once done revert back to latest protobuf)
-
-## To train
-
-Unzip Dataset.zip (for CPU)
-
-Bigger dataset from [here](https://www.kaggle.com/datasets/iarunava/cell-images-for-detecting-malaria/download?datasetVersionNumber=1) for GPU.
-
-Run model.ipynb
